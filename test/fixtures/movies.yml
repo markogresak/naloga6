@@ -1,0 +1,53 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  unknown: 1
+  action: 1
+  adventure: 1
+  animation: 1
+  childrens: 1
+  comedy: 1
+  crime: 1
+  documentary: 1
+  drama: 1
+  fantasy: 1
+  film_noir: 1
+  horror: 1
+  musical: 1
+  mystery: 1
+  romance: 1
+  sci_fi: 1
+  thriller: 1
+  war: 1
+  western: 1
+  movie_id: MyString
+  movie_title: MyString
+  release_date: MyString
+  video_release_date: MyString
+  imdb_url: MyString
+
+two:
+  unknown: 1
+  action: 1
+  adventure: 1
+  animation: 1
+  childrens: 1
+  comedy: 1
+  crime: 1
+  documentary: 1
+  drama: 1
+  fantasy: 1
+  film_noir: 1
+  horror: 1
+  musical: 1
+  mystery: 1
+  romance: 1
+  sci_fi: 1
+  thriller: 1
+  war: 1
+  western: 1
+  movie_id: MyString
+  movie_title: MyString
+  release_date: MyString
+  video_release_date: MyString
+  imdb_url: MyString
