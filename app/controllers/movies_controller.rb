@@ -16,4 +16,14 @@ class MoviesController < ApplicationController
     end
   end
 
+  def top
+
+    # magic
+    # ...
+
+    @movies = Movie.limit(5)
+    @ratings = Rating.group(:movie_id).average(:rating)
+
+  end
+
 end
