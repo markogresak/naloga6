@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+
+  root 'movies#index'
+
+  devise_for :users#, :skip => [:sessions]
+  # devise_scope :user do
+  #     get "/login" => "devise/sessions#new", :as => :new_user
+  #     get "/register" => "devise/sessions#create", :as => :register_user
+  #     delete "/logout" => "devise/sessions#destroy", :as => :logout_user
+  #   end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
