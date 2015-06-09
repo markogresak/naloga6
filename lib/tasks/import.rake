@@ -27,4 +27,18 @@ task :import => [:environment] do
     movie.save!
   end
 
+  file = "movielens-data/data.csv"
+  puts "importing ratings"
+  CSV.foreach(file, :headers => false) do |row|
+    puts "\tfor userid #{$.}"
+    row.each_with_index do |col, i|
+      ratingValue = col.to_i
+      if ratingValue > 0
+        rating = Rating.find_or_create_by(movie_id: i + 1, user_id: $.) do |r|
+          r.rating = ratingValue
+        end
+        rating.save!
+      end
+    end
+  end
 end
