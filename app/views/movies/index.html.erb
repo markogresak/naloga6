@@ -1,7 +1,7 @@
 <h1>Movies</h1>
 
 <ul>
-  <% @movies.each do |movie| %>
-    <li><%= movie.movie_title %></li>
+  <% @movies.each_with_index do |movie, i| %>
+    <li data-rating="<%= @ratings[i + 1].round(1) %>"><%= movie.movie_title %></li>
   <% end %>
 </ul>
