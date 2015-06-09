@@ -26,6 +26,7 @@ task :import => [:environment] do
     rowHash = row.drop(19).map{ |pair| Hash[*pair] }.inject{ |h1,h2| h1.merge(h2){ |*a| a[1,2] } }
     movie = Movie.find_or_create_by(movie_id: rowHash["movie_id"]) do |m|
       m.attributes = rowHash
+      m.poster = Imdb::Search.new(rowHash["movie_title"]).movies.first.try(:poster) || "http://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"
     end
     movie.save!
   end
