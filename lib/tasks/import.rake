@@ -41,4 +41,15 @@ task :import => [:environment] do
       end
     end
   end
+
+  file = "movielens-data/genre.csv"
+  puts "importing genres"
+  CSV.foreach(file, :headers => true) do |row|
+    genreName = row.to_hash["genre"]
+    genre = Movie.find_or_create_by(name: genreName) do |g|
+      g.name = genreName
+    end
+    genre.save!
+  end
+
 end
