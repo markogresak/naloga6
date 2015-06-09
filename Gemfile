@@ -46,3 +46,6 @@ end
 gem 'devise'
 gem 'imdb'
 gem 'bullet', :group => 'development'
+
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
