@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150609091813) do
+ActiveRecord::Schema.define(version: 20150609110245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,31 +22,23 @@ ActiveRecord::Schema.define(version: 20150609091813) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "movie_genres", force: :cascade do |t|
+    t.integer  "movie_id"
+    t.integer  "genre_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "movie_genres", ["genre_id"], name: "index_movie_genres_on_genre_id", using: :btree
+  add_index "movie_genres", ["movie_id"], name: "index_movie_genres_on_movie_id", using: :btree
+
   create_table "movies", force: :cascade do |t|
-    t.integer  "unknown"
-    t.integer  "action"
-    t.integer  "adventure"
-    t.integer  "animation"
-    t.integer  "childrens"
-    t.integer  "comedy"
-    t.integer  "crime"
-    t.integer  "documentary"
-    t.integer  "drama"
-    t.integer  "fantasy"
-    t.integer  "film_noir"
-    t.integer  "horror"
-    t.integer  "musical"
-    t.integer  "mystery"
-    t.integer  "romance"
-    t.integer  "sci_fi"
-    t.integer  "thriller"
-    t.integer  "war"
-    t.integer  "western"
     t.string   "movie_id"
     t.string   "movie_title"
     t.string   "release_date"
     t.string   "video_release_date"
     t.string   "imdb_url"
+    t.string   "poster"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
   end
@@ -65,8 +57,10 @@ ActiveRecord::Schema.define(version: 20150609091813) do
     t.string   "occupation"
     t.string   "zip_code"
     t.string   "label"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+    t.string   "email",              default: "", null: false
+    t.string   "encrypted_password", default: "", null: false
   end
 
 end

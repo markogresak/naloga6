@@ -16,7 +16,14 @@ task :import => [:environment] do
   file = "movielens-data/item.csv"
   puts "importing movies"
   CSV.foreach(file, :headers => true) do |row|
-    rowHash = row.to_hash
+    puts "\tfor movie #{$. - 1}"
+    (0..18).each do |i|
+      if row[i].to_i == 1
+        movieGenre = MovieGenre.find_or_create_by(movie_id: $. - 1, genre_id: i + 1)
+        movieGenre.save!
+      end
+    end
+    rowHash = row.drop(19).map{ |pair| Hash[*pair] }.inject{ |h1,h2| h1.merge(h2){ |*a| a[1,2] } }
     movie = Movie.find_or_create_by(movie_id: rowHash["movie_id"]) do |m|
       m.attributes = rowHash
     end
@@ -42,7 +49,7 @@ task :import => [:environment] do
   puts "importing genres"
   CSV.foreach(file, :headers => true) do |row|
     genreName = row.to_hash["genre"]
-    genre = Movie.find_or_create_by(name: genreName) do |g|
+    genre = Genre.find_or_create_by(name: genreName) do |g|
       g.name = genreName
     end
     genre.save!
