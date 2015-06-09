@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
 
   root 'movies#index'
+  post 'rate/:movie_id/:rating' => 'movies#rate', :as => :movie_rate
 
   devise_for :users#, :skip => [:sessions]
   # devise_scope :user do
