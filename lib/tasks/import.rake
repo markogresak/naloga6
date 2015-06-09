@@ -4,8 +4,6 @@ desc "Import users, movies from csv file"
 task :import => [:environment] do
 
   file = "movielens-data/user.csv"
-  userHeaders = CSV.read(file)[0]
-
   puts "importing users"
   CSV.foreach(file, :headers => true) do |row|
     rowHash = row.to_hash
@@ -16,8 +14,6 @@ task :import => [:environment] do
   end
 
   file = "movielens-data/item.csv"
-  movieHeaders = CSV.read(file)[0]
-
   puts "importing movies"
   CSV.foreach(file, :headers => true) do |row|
     rowHash = row.to_hash
