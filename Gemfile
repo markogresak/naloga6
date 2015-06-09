@@ -45,3 +45,4 @@ end
 
 gem 'devise'
 gem 'imdb'
+gem 'bullet', :group => 'development'
