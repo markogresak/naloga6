@@ -1,3 +1,5 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$ ->
+  $('.rating').raty
+    score: -> $(this).data 'rating'
+    path: '/assets'
+    click: (score) -> $.post "/rate/#{$(this).data 'movie'}/#{score}"; true

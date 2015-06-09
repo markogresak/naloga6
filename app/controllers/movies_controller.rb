@@ -7,7 +7,7 @@ class MoviesController < ApplicationController
   end
 
   def rate
-    @rate = Rating.create(movie_id: params[:movie_id], user_id: current_user.id, rating: params[:rating])
+    @rate = Rating.update_or_create(movie_id: params[:movie_id], user_id: current_user.id, rating: params[:rating])
 
     if @rate.save
       render :nothing => true, :status => 204
@@ -17,9 +17,6 @@ class MoviesController < ApplicationController
   end
 
   def top
-
-    # magic
-    # ...
 
     ratedMovies = current_user.movies
     unratedMovies = Movie.all - ratedMovies
@@ -57,17 +54,35 @@ class MoviesController < ApplicationController
           sumUnrated += uy * uy
         end
         k = sumBoth / Math.sqrt((sumRated * sumBoth).abs)
-        if k.abs > 0.55
-          knn.push({movie_id: unratedMovie.id, similarity: k })
+        if k.abs > 0.6
+          knn.push(unratedMovie.id)
         end
       end
     end
 
     puts knn
 
-    @movies = Movie.limit(5)
-    @ratings = Rating.group(:movie_id).average(:rating)
+    @movies = Movie.find(knn)
+    # @ratings = Rating.group(:movie_id).average(:rating)
 
+  end
+
+  def topfast
+
+    # unratedMovies = Movie.all - current_user.movies
+    topRatings = Rating.group(:movie_id).average(:rating).sort_by { |id, value| value }.reverse
+    @movies = Movie.find(topRatings.take(5).map {|r| r.first})
+    # movieIds = []
+    # i = 0
+    # while movieIds.length < 5
+    #   value = unratedMovies.find(topRatings[i].first).first
+    #   if value
+    #     movieIds.push(i + 1)
+    #   end
+    #   i += 1
+    # end
+    #
+    # @movies = Movie.find(movieIds)
   end
 
 end

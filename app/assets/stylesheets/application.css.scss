@@ -21,13 +21,17 @@ body {
   background: #eee;
 }
 
+.container {
+  width: 1380px;
+}
+
 .movie {
   width: 250px;
   height: 400px;
-  margin: 20px 10px;
+  margin: 50px 10px;
   float: left;
 
-  img {
+  img.poster {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -36,6 +40,12 @@ body {
 
   .title {
     text-align: center;
-    font-size: 25px;
+    font-size: 20px;
+  }
+
+  .rating {
+    position: relative;
+    top: -5px;
+    margin-left: 75px;
   }
 }

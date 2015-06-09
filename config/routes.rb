@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'movies#index'
   post 'rate/:movie_id/:rating' => 'movies#rate', :as => :movie_rate
   get  'top' => 'movies#top', :as => :top_movies
+  get  'top-fast' => 'movies#topfast', :as => :topfast
 
   devise_for :users#, :skip => [:sessions]
   # devise_scope :user do
