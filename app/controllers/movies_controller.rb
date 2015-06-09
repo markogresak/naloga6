@@ -29,9 +29,15 @@ class MoviesController < ApplicationController
     puts "total length: #{ratedMovies.size * unratedMovies.size}"
 
     ratedMovies.each do |ratedMovie|
+      if knn.size >= 5
+        break
+      end
       ratedMovieUsers = ratedMovie.users
       ratedMovieRatings = ratedMovie.ratings
       unratedMovies.each do |unratedMovie|
+        if knn.size >= 5
+          break
+        end
         unratedMovieUsers = unratedMovie.users
         unratedMovieRatings = unratedMovie.ratings
         usersRatedBoth = unratedMovieUsers & ratedMovieUsers
@@ -50,7 +56,10 @@ class MoviesController < ApplicationController
           sumRated += ux * ux
           sumUnrated += uy * uy
         end
-        knn.push({movie_id: unratedMovie.id, similarity: sumBoth / Math.sqrt((sumRated * sumBoth).abs) })
+        k = sumBoth / Math.sqrt((sumRated * sumBoth).abs)
+        if k.abs > 0.55
+          knn.push({movie_id: unratedMovie.id, similarity: k })
+        end
       end
     end
 
