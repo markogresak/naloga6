@@ -10,5 +10,12 @@
 
 <%= yield %>
 
+
+<script>
+  $(function () {
+    $('#logout').click(function () { $.ajax({type: 'delete', url: '/users/sign_out'}); location.reload(); });
+  });
+</script>
+
 </body>
 </html>
