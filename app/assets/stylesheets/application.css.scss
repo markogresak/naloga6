@@ -49,3 +49,26 @@ body {
     margin-left: 75px;
   }
 }
+
+.container-center {
+  margin: 100px auto;
+  text-align: center;
+
+  input {
+    width: 200px;
+    margin: 0px auto;
+  }
+
+  .actions {
+    margin-bottom: 10px;
+  }
+
+  #error_explanation {
+    h2 {
+      font-size: 20px;
+    }
+    ul {
+      list-style: none;
+    }
+  }
+}
