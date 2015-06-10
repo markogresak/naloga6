@@ -1,6 +1,6 @@
 class User < ActiveRecord::Base
 
-  validates :label, uniqueness: true
+  validates :email, uniqueness: true
   has_many :ratings
   has_many :movies, through: :ratings
 
