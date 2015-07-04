@@ -69,9 +69,10 @@ class MoviesController < ApplicationController
 
   def topfast
 
-    # unratedMovies = Movie.all - current_user.movies
-    topRatings = Rating.group(:movie_id).average(:rating).sort_by { |id, value| value }.reverse
-    @movies = Movie.find(topRatings.take(5).map {|r| r.first})
+    topIds = current_user.movies.map { |e| e.id }
+    unratedMovies = Movie.all - current_user.movies
+    topRatings = Rating.group(:movie_id).average(:rating).sort_by { |id, value| value }.reverse.reject { |e| topIds.include? e.first }
+    @movies = Movie.find(topRatings.take(5).map { |r| r.first })
     # movieIds = []
     # i = 0
     # while movieIds.length < 5
